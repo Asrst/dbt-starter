@@ -1,0 +1,12 @@
+ca_dbt_project:
+  target: ca_dbt_project
+  outputs:
+    ca_dbt_project:
+      type: postgres
+      host: localhost
+      user: postgres
+      password: postgres
+      port: 5432
+      database: ca_dbt
+      schema: dbt_outputs
+      threads: 4

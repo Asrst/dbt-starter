@@ -1,0 +1,15 @@
+version: 2
+sources:
+  - name: ca_dbt_postgres
+    database: ca_dbt
+    schema: public
+    tables:
+      - name: categories
+      - name: customers
+      - name: employees
+      - name: order_details
+        identifier: order_details
+      - name: products
+      - name: shippers
+      - name: suppliers
+      - name: orders

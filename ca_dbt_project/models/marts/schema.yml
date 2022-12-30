@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: f_orders_atleast_two_products
+    description: Orders with Atleast 2 unique products. 
+    columns:
+      - name: OrderID
+        description: Unique Order Identifier and the primary key.
+        tests:
+          - not_null
+          - unique
+            
+      - name: EmployeeID
+        description: Unique Employee Identifier.
+        tests:
+          - relationships:
+              to: ref('d_usa_employees')
+              field: EmployeeID
+              
+      - name: product_numbers
+        description: count of unique products.
+        tests:
+          - positive_value
+
+  - name: d_usa_employees
+    description: USA Employees dimension table.
+    columns:
+      - name: EmployeeID
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+          
+      - name: state_name
+        description: State Name.
