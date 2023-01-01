@@ -56,6 +56,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends postgresql-client
-          PGPASSWORD=postgres psql -U postgres -d ca_dbt -c "select * from my_table"
+          PGPASSWORD=postgres psql -h postgres -U postgres -d ca_dbt -c "select * from my_table"
 
           
