@@ -42,7 +42,7 @@ jobs:
           postgresql user: 'postgres'
           postgresql password: 'postgres'
           
-      - uses: akanieski/setup-postgres-cli@v1
+      - uses: akanieski/setup-postgres-cli@v0.1.2
         with:
           password: 'postgres'
           
