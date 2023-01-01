@@ -28,9 +28,22 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+        
+      # setup's python 3.10
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+      - run: pip install dbt-postgres
+      
+      - uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: '14'
+          postgresql db: 'ca_dbt'
+          postgresql user: 'postgres'
+          postgresql password: 'postgres'
+          
+      - uses: akanieski/setup-postgres-cli@v1
+        with:
+          password: 'postgres'
+          
+      - run: pg_isready -U postgres -d ca_dbt -p 5432
