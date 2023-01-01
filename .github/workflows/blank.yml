@@ -45,6 +45,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Setup psql client
         run: |
-          apt-get update
-          apt-get install --yes --no-install-recommends postgresql-client
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends postgresql-client
           pg_isready -U postgres -d ca_dbt -p 5432
