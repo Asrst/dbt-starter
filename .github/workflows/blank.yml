@@ -45,16 +45,18 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
         
+      # Runs a set of commands using the runners shell
+      - name: Setup psql client
+        run: |
+          sudo apt-get install --yes --no-install-recommends postgresql-client
+          PGPASSWORD=postgres psql -h localhost -U postgres -d ca_dbt -a -f source_data/ca_dbt.sql
+          PGPASSWORD=postgres psql -h localhost -U postgres -d ca_dbt -c "select * from categories"
+          
       # setup's python 3.10
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10' 
       - run: pip install dbt-postgres
                 
-      # Runs a set of commands using the runners shell
-      - name: Setup psql client
-        run: |
-          sudo apt-get install --yes --no-install-recommends postgresql-client
-          PGPASSWORD=postgres psql -h localhost -U postgres -d ca_dbt -c "select * from my_table"
 
           
