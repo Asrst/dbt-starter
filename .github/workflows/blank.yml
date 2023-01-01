@@ -19,6 +19,22 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: ca_dbt        
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -34,14 +50,7 @@ jobs:
         with:
           python-version: '3.10' 
       - run: pip install dbt-postgres
-      
-      - uses: harmon758/postgresql-action@v1
-        with:
-          postgresql version: '14'
-          postgresql db: 'ca_dbt'
-          postgresql user: 'postgres'
-          postgresql password: 'postgres'
-          
+                
       # Runs a set of commands using the runners shell
       - name: Setup psql client
         run: |
